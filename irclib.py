@@ -1183,8 +1183,8 @@ def mask_matches(nick, mask):
 
 _special = "-[]\\`^{}"
 nick_characters = string.ascii_letters + string.digits + _special
-_ircstring_translation = string.maketrans(string.ascii_uppercase + "[]\\^",
-                                          string.ascii_lowercase + "{}|~")
+_ircstring_translation = str.maketrans(string.ascii_uppercase + "[]\\^",
+                                       string.ascii_lowercase + "{}|~")
 
 def irc_lower(s):
     """Returns a lowercased string.
