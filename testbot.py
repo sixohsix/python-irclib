@@ -72,7 +72,7 @@ class TestBot(SingleServerIRCBot):
         elif cmd == "die":
             self.die()
         elif cmd == "stats":
-            for chname, chobj in self.channels.items():
+            for chname, chobj in list(self.channels.items()):
                 c.notice(nick, "--- Channel statistics ---")
                 c.notice(nick, "Channel: " + chname)
                 users = chobj.users()
@@ -95,7 +95,7 @@ class TestBot(SingleServerIRCBot):
 def main():
     import sys
     if len(sys.argv) != 4:
-        print "Usage: testbot <server[:port]> <channel> <nickname>"
+        print("Usage: testbot <server[:port]> <channel> <nickname>")
         sys.exit(1)
 
     s = sys.argv[1].split(":", 1)
@@ -104,7 +104,7 @@ def main():
         try:
             port = int(s[1])
         except ValueError:
-            print "Error: Erroneous port."
+            print("Error: Erroneous port.")
             sys.exit(1)
     else:
         port = 6667

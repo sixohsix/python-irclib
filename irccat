@@ -30,8 +30,8 @@ def on_join(connection, event):
     connection.quit("Using irclib.py")
 
 if len(sys.argv) != 4:
-    print "Usage: irccat <server[:port]> <nickname> <target>"
-    print "\ntarget is a nickname or a channel."
+    print("Usage: irccat <server[:port]> <nickname> <target>")
+    print("\ntarget is a nickname or a channel.")
     sys.exit(1)
 
 def on_disconnect(connection, event):
@@ -43,7 +43,7 @@ if len(s) == 2:
     try:
         port = int(s[1])
     except ValueError:
-        print "Error: Erroneous port."
+        print("Error: Erroneous port.")
         sys.exit(1)
 else:
     port = 6667
@@ -53,8 +53,8 @@ target = sys.argv[3]
 irc = irclib.IRC()
 try:
     c = irc.server().connect(server, port, nickname)
-except irclib.ServerConnectionError, x:
-    print x
+except irclib.ServerConnectionError as x:
+    print(x)
     sys.exit(1)
 
 c.add_global_handler("welcome", on_connect)
