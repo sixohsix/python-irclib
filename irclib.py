@@ -491,6 +491,7 @@ class ServerConnection(Connection):
                 new_data = self.ssl.read(2**14)
             else:
                 new_data = self.socket.recv(2**14)
+            new_data = new_data.decode('utf8')
         except socket.error as x:
             # The server hung up.
             self.disconnect("Connection reset by peer")
@@ -784,10 +785,11 @@ class ServerConnection(Connection):
         if self.socket is None:
             raise ServerNotConnectedError("Not connected.")
         try:
+            data = (string + "\r\n").encode('utf8')
             if self.ssl:
-                self.ssl.write(string + "\r\n")
+                self.ssl.write(data)
             else:
-                self.socket.send(string + "\r\n")
+                self.socket.send(data)
             if DEBUG:
                 print("TO SERVER:", string)
         except socket.error as x:
